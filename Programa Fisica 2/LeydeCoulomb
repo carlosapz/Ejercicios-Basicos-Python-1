@@ -1,0 +1,61 @@
+import math
+
+# Función para convertir grados a radianes
+def to_radians(degrees):
+    return degrees * (math.pi / 180)
+
+# Función para calcular la fuerza entre dos cargas
+def coulomb_force(q1, q2, r, k=8.99e9):
+    return k * abs(q1) * abs(q2) / (r ** 2)
+
+# Función para imprimir los resultados y determinar el octante
+def print_results(fx, fy, fz, system):
+    # Imprimir la fuerza resultante en el sistema de unidades elegido
+    if system == "Coulomb":
+        print(f"Fuerza resultante: ({fx}, {fy}, {fz}) N")
+    elif system == "ElectronVolt":
+        fx_eV = fx * 6.242e18
+        fy_eV = fy * 6.242e18
+        fz_eV = fz * 6.242e18
+        print(f"Fuerza resultante: ({fx_eV}, {fy_eV}, {fz_eV}) eV")
+    else:
+        print("Sistema de unidades no válido.")
+        return
+    
+    # Determinar el octante de la fuerza resultante
+    if fx > 0 and fy > 0 and fz > 0:
+        print("La fuerza resultante está en el primer octante.")
+    elif fx < 0 and fy > 0 and fz > 0:
+        print("La fuerza resultante está en el segundo octante.")
+    elif fx < 0 and fy < 0 and fz > 0:
+        print("La fuerza resultante está en el tercer octante.")
+    elif fx > 0 and fy < 0 and fz > 0:
+        print("La fuerza resultante está en el cuarto octante.")
+    elif fx > 0 and fy > 0 and fz < 0:
+        print("La fuerza resultante está en el quinto octante.")
+    elif fx < 0 and fy > 0 and fz < 0:
+        print("La fuerza resultante está en el sexto octante.")
+    elif fx < 0 and fy < 0 and fz < 0:
+        print("La fuerza resultante está en el séptimo octante.")
+    elif fx > 0 and fy < 0 and fz < 0:
+        print("La fuerza resultante está en el octavo octante.")
+
+# Pedir al usuario que ingrese las cargas y las distancias entre ellas
+q1 = float(input("Ingrese la carga de la primera partícula en coulombs: "))
+q2 = float(input("Ingrese la carga de la segunda partícula en coulombs: "))
+r = float(input("Ingrese la distancia entre las partículas en metros: "))
+
+# Pedir al usuario que elija el sistema de unidades
+print("Elija el sistema de unidades:")
+print("1. Coulomb")
+print("2. ElectronVolt")
+option = int(input("Opción: "))
+
+# Calcular la fuerza resultante en cada eje
+fx = coulomb_force(q1, q2, r)
+fy = 0
+fz = 0
+
+# Imprimir los resultados y determinar el octante
+if option == 1:
+    print
